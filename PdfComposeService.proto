@@ -1,0 +1,26 @@
+syntax = "proto3";
+option go_package = ".;pdfcompose";
+
+package pdfcompose;
+
+service PdfCompose {
+  rpc Send(Images) returns(Pdf);
+}
+
+message Images {
+  oneof data1 {
+    bytes upfile1 = 1;
+  }
+  oneof data2 {
+    bytes upfile2 = 2;
+  }
+  oneof data3 {
+    bytes upfile3 = 3;
+  }
+}
+
+message Pdf {
+  oneof data {
+    bytes result = 1;
+  }
+}
