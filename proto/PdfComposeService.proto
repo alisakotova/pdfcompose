@@ -4,15 +4,16 @@ option go_package = ".;pdfcompose";
 package pdfcompose;
 
 service PdfCompose {
-  rpc Send(Images) returns(Pdf);
+  rpc Send(stream Images) returns(stream Pdf);
 }
 
 message Images {
-    bytes upfile1 = 1;
-    bytes upfile2 = 2;
-    bytes upfile3 = 3;
+  oneof img {
+    bool new_file = 1;
+    bytes chunk_file = 2;
+  }
 }
 
 message Pdf {
-    bytes result = 1;
+  bytes result = 1;
 }
